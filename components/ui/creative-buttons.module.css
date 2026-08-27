@@ -1,0 +1,198 @@
+/* Shared -------------------------------------------------------------- */
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.base p {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Primary — expanding dot ---------------------------------------------- */
+.primaryBtn {
+  composes: base;
+  position: relative;
+  gap: 15px;
+  background-color: #0b0b0b;
+  color: #f8f1e7;
+  padding: 18px 34px;
+  overflow: hidden;
+}
+
+.primaryBtn .round {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #c9fd74;
+  transition: 0.3s ease-out;
+}
+
+.primaryBtn .title {
+  transition: 0.3s ease-out;
+  z-index: 2;
+}
+
+.primaryBtn .arrow {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -8px;
+  transition: transform 0.3s ease-out;
+  z-index: 2;
+  color: #0b0b0b;
+}
+
+/* The dot is a circle expanding from near the left edge, so it needs enough
+   radius to clear the far corners on wider labels — 40 leaves a crescent. */
+.primaryBtn:hover .round {
+  transform: scale(76);
+}
+
+.primaryBtn:hover .title {
+  color: #0b0b0b;
+  transform: translateX(-22px);
+}
+
+.primaryBtn:hover .arrow {
+  transform: translateX(-46px);
+}
+
+/* Secondary — slide-up reveal with expanding blob ---------------------- */
+.secondaryBtn {
+  composes: base;
+  padding: 18px 34px;
+  background-color: #0b0b0b;
+  color: #f8f1e7;
+  position: relative;
+  overflow: hidden;
+}
+
+.secondaryBtn .primaryLabel {
+  top: 0;
+  position: relative;
+  transition: top 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.secondaryBtn .secondaryLabel {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: top 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.secondaryBtn .secondaryLabel p {
+  color: #0b0b0b;
+  position: absolute;
+  z-index: 2;
+}
+
+.secondaryBtn .blob {
+  background-color: #c9fd74;
+  width: 60%;
+  height: 100%;
+  border-radius: 50%;
+  transition: 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.secondaryBtn:hover .primaryLabel {
+  top: -40px;
+}
+
+.secondaryBtn:hover .secondaryLabel {
+  top: 0;
+}
+
+.secondaryBtn:hover .blob {
+  width: 100%;
+  border-radius: 100px;
+}
+
+/* Contact — marquee slider + per-letter reveal ------------------------- */
+.contactBtn {
+  composes: base;
+  background-color: #0b0b0b;
+  color: #f8f1e7;
+  padding: 18px 0;
+  width: 240px;
+  transition: background-color 0.35s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.contactBtn .mask {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.contactBtn .slider {
+  display: flex;
+  position: relative;
+  top: 0;
+  animation: slide 5s linear infinite;
+  transition: top 0.75s ease-out;
+}
+
+.contactBtn .slider p {
+  white-space: nowrap;
+}
+
+.contactBtn .slider p:nth-of-type(2) {
+  position: absolute;
+  left: calc(100% + 15px);
+}
+
+/* Letters sit camouflaged against the pill until the background flips. */
+.contactBtn .letters {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  height: 100%;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.contactBtn .letters span {
+  position: relative;
+  top: 20px;
+  color: #0b0b0b;
+  transition: top 0.25s ease-out;
+}
+
+.contactBtn:hover {
+  background-color: #c9fd74;
+}
+
+.contactBtn:hover .slider {
+  top: -22px;
+}
+
+.contactBtn:hover .letters span {
+  top: 0;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 15px));
+  }
+}

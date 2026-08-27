@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio — Afthar N N
 
-## Getting Started
+Personal portfolio built with Next.js (App Router) and TypeScript.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** + React 19, App Router, Turbopack
+- **TypeScript**
+- **Tailwind CSS v4** — theme tokens defined in `app/globals.css`
+- **Framer Motion** — scroll and entrance animations
+- **Locomotive Scroll** (Lenis) — smooth scrolling
+- **lucide-react** — UI icons · **react-icons** — brand logos
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm run build   # production build
+npm run lint    # eslint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+```
+app/                      routes, root layout, global styles
+components/
+  layout/                 app shell, loader, smooth scroll, header
+  providers/              theme provider (light/dark)
+  sections/               hero, banner, about, skills
+  ui/                     reusable primitives
+lib/                      helpers
+public/                   logo, resume PDF
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Theming
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Light and dark palettes are CSS variables on `:root` and `.dark` in
+`app/globals.css`. A small script in the root layout applies the stored
+preference before first paint so the theme never flashes. Light is the default;
+the toggle lives in the menu panel.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content
 
-## Deploy on Vercel
+Copy and data are separated from components so they can be edited without
+touching markup:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `components/sections/hero/content.ts` — hero lines
+- `components/sections/skills/skills-data.ts` — skills and brand icons
+- `components/layout/header/links.ts` — navigation links
