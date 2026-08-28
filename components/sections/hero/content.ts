@@ -53,7 +53,7 @@ export const heroLines: HeroLine[] = [
   },
   {
     scale: 0.6,
-    segments: [{ text: "Now building it for" }],
+    segments: [{ text: "Now " } , { text: "S", variant: "swash" }, { text: "hipping it for" }],
   },
   {
     scale: 0.6,

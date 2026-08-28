@@ -1,71 +1,112 @@
-'use client';
+"use client";
 
 import {
-  createContext,
-  useCallback,
-  useContext,
-  useState,
-  type ReactNode,
-} from 'react';
+	createContext,
+	useCallback,
+	useContext,
+	useState,
+	type ReactNode,
+} from "react";
 
-export type Theme = 'light' | 'dark';
+export type Theme = "light" | "dark";
 
-const STORAGE_KEY = 'theme';
+const STORAGE_KEY = "theme";
 
 interface ThemeContextValue {
-  theme: Theme;
-  toggleTheme: () => void;
+	theme: Theme;
+	toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextValue | null>(null);
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-/** Reads whatever the pre-hydration script already applied to <html>. */
-function readTheme(): Theme {
-  if (typeof document === 'undefined') return 'light';
-  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-}
+function getStoredTheme(): Theme | null {
+	try {
+		const stored = localStorage.getItem(STORAGE_KEY);
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Seeded lazily rather than synced in an effect, which would queue an extra
-  // render on every load just to catch up with the DOM.
-  const [theme, setTheme] = useState<Theme>(readTheme);
-
-  const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next = prev === 'light' ? 'dark' : 'light';
-      document.documentElement.classList.toggle('dark', next === 'dark');
-      try {
-        localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        // Storage unavailable (private mode) — theme still applies for this session.
-      }
-      return next;
-    });
-  }, []);
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error('useTheme must be used within a ThemeProvider');
-  return ctx;
+		return stored === "light" || stored === "dark" ? stored : null;
+	} catch {
+		return null;
+	}
 }
 
 /**
- * Runs before paint so a stored dark preference never flashes light first.
- * Defaults to light when nothing is stored.
+ * Reads the theme that was already applied to <html>
+ * by the pre-hydration initialization script.
+ */
+function getInitialTheme(): Theme {
+	if (typeof document === "undefined") {
+		return "dark";
+	}
+
+	const storedTheme = getStoredTheme();
+
+	if (storedTheme) {
+		return storedTheme;
+	}
+
+	return document.documentElement.classList.contains("dark")
+		? "dark"
+		: "light";
+}
+
+function applyTheme(theme: Theme) {
+	document.documentElement.classList.toggle("dark", theme === "dark");
+}
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+	const [theme, setTheme] = useState<Theme>(getInitialTheme);
+
+	const toggleTheme = useCallback(() => {
+		setTheme((currentTheme) => {
+			const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+			applyTheme(nextTheme);
+
+			try {
+				localStorage.setItem(STORAGE_KEY, nextTheme);
+			} catch {
+				// Theme still works for the current session.
+			}
+
+			return nextTheme;
+		});
+	}, []);
+
+	return (
+		<ThemeContext.Provider value={{ theme, toggleTheme }}>
+			{children}
+		</ThemeContext.Provider>
+	);
+}
+
+export function useTheme() {
+	const context = useContext(ThemeContext);
+
+	if (!context) {
+		throw new Error("useTheme must be used within a ThemeProvider");
+	}
+
+	return context;
+}
+
+/**
+ * Runs before React hydration/paint.
+ *
+ * Dark is the default.
+ * An explicit "light" preference is respected.
  */
 export const themeInitScript = `
-(function(){
-  try {
-    if (localStorage.getItem('${STORAGE_KEY}') === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
-  } catch (e) {}
+(function () {
+	try {
+		var storedTheme = localStorage.getItem("${STORAGE_KEY}");
+
+		if (storedTheme === "light") {
+			document.documentElement.classList.remove("dark");
+		} else {
+			document.documentElement.classList.add("dark");
+		}
+	} catch {
+		document.documentElement.classList.add("dark");
+	}
 })();
 `;
