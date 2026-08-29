@@ -11,28 +11,34 @@ import {
 const text =
   "Give me wifi and enough caffeine and I'll build systems that elevate your brand — anywhere in the world. Let's connect on your next big idea.";
 
-const words = text.split(" ");
+/**
+ * Letters carry a running index across the whole sentence so each one owns an
+ * equal slice of the scroll range. Words stay grouped so the paragraph still
+ * wraps on word boundaries rather than mid-word.
+ */
+const totalLetters = text.replace(/\s/g, "").length;
 
-interface WordProps {
-  children: string;
+let cursor = 0;
+const wordTokens = text.split(" ").map((word) =>
+  word.split("").map((char) => ({ char, index: cursor++ }))
+);
+
+interface LetterProps {
+  char: string;
   progress: MotionValue<number>;
   range: [number, number];
 }
 
-function Word({ children, progress, range }: WordProps) {
+function Letter({ char, progress, range }: LetterProps) {
   const opacity = useTransform(progress, range, [0.15, 1]);
-  return (
-    <motion.span style={{ opacity }} className="mr-[0.25em]">
-      {children}
-    </motion.span>
-  );
+  return <motion.span style={{ opacity }}>{char}</motion.span>;
 }
 
 export default function About() {
   const container = useRef<HTMLParagraphElement>(null);
 
   // Reveal window: begins as the paragraph sits 85% down the viewport and
-  // completes by the time it reaches 40% — words light up as it rises.
+  // completes by the time it reaches 40% — letters light up as it rises.
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start 0.85", "start 0.4"],
@@ -47,15 +53,17 @@ export default function About() {
         ref={container}
         className="flex flex-wrap text-[clamp(1.5rem,4vw,3.25rem)] font-bold leading-[1.2] tracking-tight text-foreground"
       >
-        {words.map((word, i) => (
-          <Word
-            key={i}
-            progress={scrollYProgress}
-            // Each word owns an equal slice of the scroll range.
-            range={[i / words.length, (i + 1) / words.length]}
-          >
-            {word}
-          </Word>
+        {wordTokens.map((letters, i) => (
+          <span key={i} className="mr-[0.25em] whitespace-nowrap">
+            {letters.map(({ char, index }) => (
+              <Letter
+                key={index}
+                char={char}
+                progress={scrollYProgress}
+                range={[index / totalLetters, (index + 1) / totalLetters]}
+              />
+            ))}
+          </span>
         ))}
       </p>
     </section>

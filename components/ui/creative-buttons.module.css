@@ -21,16 +21,12 @@
 	composes: base;
 	position: relative;
 	gap: 15px;
-	background-color: #0b0b0b;
-	color: #f8f1e7;
-	border: 1px solid rgba(201, 253, 116, 0.25);
+	/* Token-based so the pill inverts with the theme instead of going
+	   ink-on-ink (invisible) in dark mode. */
+	background-color: var(--foreground);
+	color: var(--background);
 	padding: 18px 34px;
 	overflow: hidden;
-}
-
-:global(.dark) .primaryBtn {
-	border-color: #c9fd74;
-	box-shadow: 0 0 0 1px rgba(201, 253, 116, 0.4);
 }
 
 .primaryBtn .round {
@@ -75,8 +71,8 @@
 .secondaryBtn {
 	composes: base;
 	padding: 18px 34px;
-	background-color: #0b0b0b;
-	color: #f8f1e7;
+	background-color: var(--foreground);
+	color: var(--background);
 	position: relative;
 	overflow: hidden;
 }
@@ -129,8 +125,8 @@
 /* Contact — marquee slider + per-letter reveal ------------------------- */
 .contactBtn {
 	composes: base;
-	background-color: #0b0b0b;
-	color: #f8f1e7;
+	background-color: var(--foreground);
+	color: var(--background);
 	padding: 18px 0;
 	width: 240px;
 	transition: background-color 0.35s ease-out;
@@ -178,7 +174,8 @@
 .contactBtn .letters span {
 	position: relative;
 	top: 20px;
-	color: #0b0b0b;
+	/* Matches the pill so the label is hidden until the background flips. */
+	color: var(--foreground);
 	transition: top 0.25s ease-out;
 }
 
@@ -192,6 +189,8 @@
 
 .contactBtn:hover .letters span {
 	top: 0;
+	/* Ink reads correctly on the lime fill in either theme. */
+	color: #0b0b0b;
 }
 
 @keyframes slide {
