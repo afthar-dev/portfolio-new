@@ -6,10 +6,12 @@ import Image from "next/image";
 import TransitionLink from "@/components/ui/transition-link";
 import MenuButton from "./menu-button";
 import Nav from "./nav";
-import { menuSlide } from "./anim";
+import { menuClosed, menuOpen, menuTransition } from "./anim";
+import useMenuSize from "./use-menu-size";
 
 export default function Header() {
   const [isActive, setIsActive] = useState(false);
+  const menuSize = useMenuSize();
 
   return (
     // Gutters match the .shell padding so the logo lines up with section content.
@@ -35,9 +37,9 @@ export default function Header() {
       {/* Anchors the expanding panel to the top-right corner. */}
       <div className="relative">
         <motion.div
-          variants={menuSlide}
-          initial="closed"
-          animate={isActive ? "open" : "closed"}
+          initial={menuClosed}
+          animate={isActive ? menuOpen(menuSize) : menuClosed}
+          transition={menuTransition}
           className="absolute overflow-hidden rounded-3xl bg-lime text-ink shadow-xl"
         >
           <AnimatePresence>

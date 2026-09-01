@@ -1,21 +1,33 @@
 import type { Variants } from 'framer-motion';
 
-export const menuSlide: Variants = {
-  closed: {
-    width: 96,
-    height: 44,
-    top: 0,
-    right: 0,
-    transition: { duration: 0.75, type: 'tween', ease: [0.76, 0, 0.24, 1] },
-  },
-  open: {
-    width: 440,
-    height: 600,
-    top: -12,
-    right: -12,
-    transition: { duration: 0.75, type: 'tween', ease: [0.76, 0, 0.24, 1] },
-  },
+export interface MenuSize {
+  width: number;
+  height: number;
+}
+
+export const CLOSED_WIDTH = 96;
+export const CLOSED_HEIGHT = 44;
+
+export const menuTransition = {
+  duration: 0.75,
+  type: 'tween',
+  ease: [0.76, 0, 0.24, 1],
+} as const;
+
+export const menuClosed = {
+  width: CLOSED_WIDTH,
+  height: CLOSED_HEIGHT,
+  top: 0,
+  right: 0,
 };
+
+/* The open panel is inset by 12px past the header padding on the top/right. */
+export const menuOpen = (size: MenuSize) => ({
+  width: size.width,
+  height: size.height,
+  top: -12,
+  right: -12,
+});
 
 export const perspective: Variants = {
   initial: { opacity: 0, rotateX: 90, y: 80, x: -20 },
