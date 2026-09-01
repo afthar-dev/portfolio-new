@@ -29,13 +29,13 @@ export default function Nav({ onNavigate }: NavProps) {
               animate="enter"
               exit="exit"
             >
-              <Link
+              <TransitionLink
                 href={link.href}
                 onClick={onNavigate}
                 className="font-heading block py-1 text-2xl uppercase text-ink transition-colors hover:text-burgundy sm:text-3xl"
               >
                 {link.title}
-              </Link>
+              </TransitionLink>
             </motion.div>
           </div>
         ))}
