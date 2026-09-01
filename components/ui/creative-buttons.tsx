@@ -13,6 +13,9 @@ interface ButtonProps {
   download?: string;
   /** Icon rendered in the slide-in slot. Defaults to an arrow. */
   icon?: ReactNode;
+  /** Renders a real <button> instead of a link — for form submits. */
+  type?: 'submit' | 'button';
+  disabled?: boolean;
 }
 
 /** Expanding-dot button: the dot scales up to flood the pill on hover. */
@@ -22,18 +25,32 @@ export function PrimaryButton({
   className = '',
   download,
   icon,
+  type,
+  disabled,
 }: ButtonProps) {
-  return (
-    <Link
-      href={href}
-      download={download}
-      className={`${styles.primaryBtn} ${className}`}
-    >
+  const inner = (
+    <>
       <div className={styles.round} />
       <p className={styles.title}>{label}</p>
       <div className={styles.arrow}>
         {icon ?? <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />}
       </div>
+    </>
+  );
+
+  const classes = `${styles.primaryBtn} ${className}`;
+
+  if (type) {
+    return (
+      <button type={type} disabled={disabled} className={classes}>
+        {inner}
+      </button>
+    );
+  }
+
+  return (
+    <Link href={href} download={download} className={classes}>
+      {inner}
     </Link>
   );
 }
@@ -55,7 +72,7 @@ export function SecondaryButton({ label, href = '#', className = '' }: ButtonPro
 export function ContactButton({
   label = 'Get in touch',
   marquee = 'Let us work together',
-  href = '#contact',
+  href = '/contact',
   className = '',
 }: ButtonProps & { marquee?: string }) {
   return (

@@ -25,15 +25,9 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="mx-auto flex w-[94%] max-w-6xl flex-col gap-12 py-28 text-foreground sm:gap-16 sm:py-36"
+      className="shell flex flex-col gap-12 py-28 text-foreground sm:gap-16 sm:py-36"
     >
-      <div className="flex flex-col gap-5">
-        <SectionHeading label="Services" />
-        {/* <p className="max-w-2xl text-lg text-foreground/60 sm:text-xl">
-          One developer, start to finish — scoped, built, deployed, and still
-          working long after handover.
-        </p> */}
-      </div>
+      <SectionHeading label="Services" />
 
       <div ref={container} className="relative flex flex-col">
         {services.map((service, i) => (

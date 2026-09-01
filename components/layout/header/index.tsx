@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
+import TransitionLink from "@/components/ui/transition-link";
 import MenuButton from "./menu-button";
 import Nav from "./nav";
 import { menuSlide } from "./anim";
@@ -12,10 +12,11 @@ export default function Header() {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[500] flex items-start justify-between px-6 py-6">
-      <Link
-        href="#hero"
-        className="group flex items-center gap-3 text-foreground"
+    // Gutters match the .shell padding so the logo lines up with section content.
+    <header className="fixed inset-x-0 top-0 z-[500] flex items-start justify-between px-5 py-6 sm:px-10 lg:px-16">
+      <TransitionLink
+        href="/"
+        className="group flex min-h-11 items-center gap-3 text-foreground"
         aria-label="Back to top"
       >
         <Image
@@ -29,7 +30,7 @@ export default function Header() {
         <span className="font-heading text-sm uppercase tracking-wide transition-opacity group-hover:opacity-60 sm:text-base">
           Afthar
         </span>
-      </Link>
+      </TransitionLink>
 
       {/* Anchors the expanding panel to the top-right corner. */}
       <div className="relative">

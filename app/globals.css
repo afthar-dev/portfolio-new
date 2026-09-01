@@ -22,14 +22,12 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-burgundy: #5b0f18;
-  --color-cream: #f8f1e7;
   --color-ink: #0b0b0b;
   --color-lime: #c9fd74;
   --font-sans: var(--font-inter);
   --font-heading: var(--font-special-gothic);
   --font-display: var(--font-display);
   --font-script: var(--font-script);
-  --font-pixel: var(--font-pixel);
 }
 
 body {
@@ -80,4 +78,45 @@ body {
   .animate-marquee-reverse {
     animation: none;
   }
+}
+
+/* Page shell: the single place that decides how wide content runs and how
+   much gutter it keeps. Every section uses this instead of its own max-width,
+   so the site stays consistent and the measure is tunable in one edit. */
+.shell {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shell {
+    padding-inline: 4rem;
+  }
+}
+
+/* Footer runs inverse to the page: a dark slab under light pages, a light one
+   under dark pages. Tokens are swapped rather than referenced across each
+   other, since a rule that sets --background from --foreground (and vice
+   versa) on one element is a cycle and both would be dropped. */
+.footer-invert {
+  --background: #0b0b0b;
+  --foreground: #f8f1e7;
+  --accent: #c9fd74;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.dark .footer-invert {
+  --background: #f8f1e7;
+  --foreground: #0b0b0b;
+  /* Lime is unreadable on cream, so the light slab uses burgundy instead. */
+  --accent: #5b0f18;
 }

@@ -26,26 +26,40 @@ export default function SectionHeading({
   label,
   className = '',
 }: SectionHeadingProps) {
+  const words = label.split(' ');
+  // Runs across the whole label so the stagger does not restart each word.
+  let index = 0;
+
   return (
     <h2
-      className={`font-heading flex flex-wrap uppercase leading-[0.95] tracking-tight text-foreground text-4xl sm:text-5xl md:text-6xl ${className}`}
+      className={`font-heading flex flex-wrap uppercase leading-[0.95] tracking-tight text-foreground text-[clamp(1.75rem,8vw,2.25rem)] sm:text-5xl md:text-6xl ${className}`}
     >
       {/* Readable label for assistive tech; the split letters are decorative. */}
       <span className="sr-only">{label}</span>
 
-      <span aria-hidden="true" style={{ perspective: '400px' }} className="flex">
-        {label.split('').map((char, i) => (
-          <motion.span
-            key={i}
-            custom={i}
-            variants={letter}
-            initial="initial"
-            whileInView="enter"
-            viewport={{ once: true, amount: 0.5 }}
-            className="inline-block origin-bottom"
-          >
-            {char === ' ' ? ' ' : char}
-          </motion.span>
+      {/* Grouped by word so a long label wraps between words rather than
+          overflowing the viewport. Letters within a word stay on one line. */}
+      <span
+        aria-hidden="true"
+        style={{ perspective: '400px' }}
+        className="flex flex-wrap gap-x-[0.25em]"
+      >
+        {words.map((word, w) => (
+          <span key={w} className="flex">
+            {word.split('').map((char) => (
+              <motion.span
+                key={index}
+                custom={index++}
+                variants={letter}
+                initial="initial"
+                whileInView="enter"
+                viewport={{ once: true, amount: 0.5 }}
+                className="inline-block origin-bottom"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </span>
         ))}
       </span>
     </h2>

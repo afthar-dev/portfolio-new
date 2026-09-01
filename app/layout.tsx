@@ -4,7 +4,6 @@ import {
   Inter,
   Instrument_Serif,
   Great_Vibes,
-  Pixelify_Sans,
 } from 'next/font/google';
 import './globals.css';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
@@ -38,12 +37,6 @@ const greatVibes = Great_Vibes({
   subsets: ['latin'],
 });
 
-// Pixel face used only for the decorative glyphs in the hero.
-const pixelify = Pixelify_Sans({
-  variable: '--font-pixel',
-  subsets: ['latin'],
-});
-
 export const metadata: Metadata = {
   title: 'Afthar N N — Full Stack Developer',
   description:
@@ -61,7 +54,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${specialGothic.variable} ${inter.variable} ${instrumentSerif.variable} ${greatVibes.variable} ${pixelify.variable} h-full antialiased`}
+      className={`${specialGothic.variable} ${inter.variable} ${instrumentSerif.variable} ${greatVibes.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

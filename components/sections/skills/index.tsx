@@ -45,7 +45,7 @@ function Row({ skills, reverse }: { skills: Skill[]; reverse?: boolean }) {
 export default function Skills() {
 	return (
 		<section id="skills" className="py-28 text-foreground sm:py-36">
-			<div className="mx-auto flex w-[95%] max-w-6xl flex-col gap-12 sm:gap-16">
+			<div className="shell flex flex-col gap-12 sm:gap-16">
 				<SectionHeading label="Skills" />
 
 				{/* Two blocks side by side under the heading; stacked on small screens. */}

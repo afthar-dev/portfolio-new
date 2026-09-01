@@ -47,7 +47,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="mx-auto flex w-[88%] max-w-5xl flex-col gap-10 pt-32 pb-24 sm:pt-40"
+      className="shell flex flex-col gap-10 pt-32 pb-24 sm:pt-40"
     >
       <p
         ref={container}

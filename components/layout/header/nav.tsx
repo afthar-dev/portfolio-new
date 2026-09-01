@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import TransitionLink from '@/components/ui/transition-link';
 import { links } from './links';
 import { perspective } from './anim';
 import ThemeToggle from './theme-toggle';
@@ -26,13 +26,13 @@ export default function Nav({ onNavigate }: NavProps) {
             animate="enter"
             exit="exit"
           >
-            <Link
+            <TransitionLink
               href={link.href}
               onClick={onNavigate}
               className="font-heading block py-1 text-3xl uppercase text-ink transition-colors hover:text-burgundy"
             >
               {link.title}
-            </Link>
+            </TransitionLink>
           </motion.div>
         </div>
       ))}

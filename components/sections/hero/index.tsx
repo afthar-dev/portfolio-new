@@ -27,13 +27,6 @@ function renderSegment(segment: Segment, key: number) {
       </span>
     );
   }
-  if (segment.variant === "pixel") {
-    return (
-      <span key={key} className="font-pixel text-[1.2em]">
-        {segment.text}
-      </span>
-    );
-  }
   return <span key={key}>{segment.text}</span>;
 }
 

@@ -48,4 +48,4 @@ export const services: Service[] = [
 ];
 
 /** Where each service card sends an interested visitor. */
-export const serviceCtaHref = '#contact';
+export const serviceCtaHref = '/contact';

@@ -1,0 +1,56 @@
+/* Scalloped edges, cut out of both sides with repeating radial masks.
+   Two layers are intersected so the left and right bites apply together. */
+.ticket {
+	position: relative;
+	/* Printed paper: stays light in both themes. Theme tokens are pinned here
+	   so children (the CTA button, the tear line) resolve against the paper
+	   rather than the page behind it. */
+	background: #fffdf9;
+	--background: #fffdf9;
+	--foreground: #0b0b0b;
+	border-radius: 20px;
+	-webkit-mask:
+		radial-gradient(circle 9px at 0 50%, #0000 97%, #000 100%) 0 0 / 100% 28px
+			repeat-y,
+		radial-gradient(circle 9px at 100% 50%, #0000 97%, #000 100%) 0 0 / 100% 28px
+			repeat-y;
+	mask:
+		radial-gradient(circle 9px at 0 50%, #0000 97%, #000 100%) 0 0 / 100% 28px
+			repeat-y,
+		radial-gradient(circle 9px at 100% 50%, #0000 97%, #000 100%) 0 0 / 100% 28px
+			repeat-y;
+	-webkit-mask-composite: source-in;
+	mask-composite: intersect;
+}
+
+/* The dashed tear line between stub and body. */
+.perforation {
+	border-left: 2px dashed color-mix(in srgb, var(--foreground) 35%, transparent);
+}
+
+/* Half-circle bites at the top and bottom of the tear line. They are filled
+   with the page background so they read as holes punched through the paper. */
+.notch {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	border-radius: 9999px;
+	/* Captured on the section before the ticket pins its own tokens, so the
+	   holes stay the colour of the page behind the paper. */
+	background: var(--page-bg);
+	transform: translateX(-50%);
+}
+
+.notchTop {
+	top: -15px;
+}
+
+.notchBottom {
+	bottom: -15px;
+}
+
+/* Rotated stub label, reading bottom-to-top like a real ticket. */
+.stubText {
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+}

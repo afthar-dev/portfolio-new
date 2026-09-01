@@ -7,8 +7,6 @@ export interface Project {
   year: string;
   href?: string;
   image: string;
-  /** Set when the image is stock rather than a shot of the real project. */
-  stock?: boolean;
 }
 
 export const featuredProjects: Project[] = [
@@ -17,8 +15,8 @@ export const featuredProjects: Project[] = [
     title2: 'Voice Agent',
     discipline: 'AI, Realtime audio',
     year: '2026',
+    // Stock image, unlike the other two which are screenshots of the real work.
     image: '/images/voice-agent.jpg',
-    stock: true,
   },
   {
     title1: 'Minnies',
