@@ -35,7 +35,7 @@ function getStoredTheme(): Theme | null {
  */
 function getInitialTheme(): Theme {
   if (typeof document === "undefined") {
-    return "dark";
+    return "light";
   }
 
   const storedTheme = getStoredTheme();
