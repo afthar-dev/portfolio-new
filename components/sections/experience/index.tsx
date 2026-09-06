@@ -130,57 +130,66 @@ export default function Experience() {
 
   const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
 
-  if (!pinned) {
-    return (
-      <section
-        id="experience"
-        className="flex flex-col gap-12 py-28 text-foreground sm:gap-16 sm:py-36"
-      >
+  return (
+    <section
+      id="experience"
+      className={
+        pinned
+          ? "text-foreground"
+          : "flex flex-col gap-12 py-28 text-foreground sm:gap-16 sm:py-36"
+      }
+    >
+      {!pinned && (
         <div className="shell">
           <SectionHeading label="Experience" />
         </div>
+      )}
 
-        {/* Swipeable row. overscroll-x-contain stops the swipe turning into a
-            browser back gesture once the row hits its end. */}
-        <div className="overflow-x-auto overscroll-x-contain px-5 pb-4 sm:px-10">
-          <div className="relative w-max pr-5">
-            <Rail />
-            <Track />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section id="experience" className="text-foreground">
-      {/* Tall spacer: its height is the scroll budget for the sideways travel.
-          min-h-screen holds the space until the first measurement lands, so the
-          section never collapses and shifts the page below it. */}
+      {/* Mounted in both layouts. useScroll resolves its target during the
+          first (mobile-assumed) render, so a container that only existed in
+          the pinned branch left the ref empty and threw "target ref is defined
+          but not hydrated". When pinned, this element's height is the scroll
+          budget for the sideways travel, and min-h-screen holds that space
+          until the first measurement lands so the page below never jumps. */}
       <div
         ref={container}
-        style={distance ? { height: `${distance + viewportH}px` } : undefined}
-        className="relative min-h-screen"
+        style={
+          pinned && distance
+            ? { height: `${distance + viewportH}px` }
+            : undefined
+        }
+        className={pinned ? "relative min-h-screen" : undefined}
       >
-        <div className="sticky top-0 flex h-screen flex-col justify-center gap-16 overflow-hidden">
-          <div className="shell">
-            <SectionHeading label="Experience" />
+        {pinned ? (
+          <div className="sticky top-0 flex h-screen flex-col justify-center gap-16 overflow-hidden">
+            <div className="shell">
+              <SectionHeading label="Experience" />
+            </div>
+
+            {/* The rail sits outside the moving row so it spans the viewport
+                and stays put while the cards travel across it. */}
+            <div className="relative">
+              <Rail progress={scrollYProgress} />
+
+              <motion.div
+                ref={track}
+                style={{ x }}
+                className="relative flex w-max pl-16 pr-[20vw] will-change-transform"
+              >
+                <Track />
+              </motion.div>
+            </div>
           </div>
-
-          {/* The rail sits outside the moving row so it spans the viewport and
-              stays put while the cards travel across it. */}
-          <div className="relative">
-            <Rail progress={scrollYProgress} />
-
-            <motion.div
-              ref={track}
-              style={{ x }}
-              className="relative flex w-max pl-16 pr-[20vw] will-change-transform"
-            >
+        ) : (
+          /* Swipeable row. overscroll-x-contain stops the swipe turning into a
+             browser back gesture once the row hits its end. */
+          <div className="overflow-x-auto overscroll-x-contain px-5 pb-4 sm:px-10">
+            <div className="relative w-max pr-5">
+              <Rail />
               <Track />
-            </motion.div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

@@ -2,12 +2,17 @@ import type { Metadata } from 'next';
 import SectionHeading from '@/components/ui/section-heading';
 import { PrimaryButton } from '@/components/ui/creative-buttons';
 import Reveal from '@/components/ui/reveal';
+import LineReveal from '@/components/ui/line-reveal';
+import Portrait from './portrait';
 
 export const metadata: Metadata = {
   title: 'About — Afthar N N',
   description:
     'Afthar N N — developer from Kerala, working in Bangalore. Websites and internal tools.',
 };
+
+const lead =
+  'I started out with circuit boards. Now I build things for the web.';
 
 const paragraphs = [
   "I'm Afthar. I'm from Kerala, and I work in Bangalore. For the last year and a half I've been building websites and the kind of internal tools people open every morning without thinking about them.",
@@ -29,39 +34,54 @@ export default function AboutPage() {
         <div className="flex flex-col gap-8">
           <SectionHeading label="About" />
 
-          <Reveal delay={0.15}>
-            <p className="max-w-3xl font-display text-[clamp(1.75rem,4.5vw,3.25rem)] leading-[1.15] tracking-tight">
-              I started out with circuit boards. Now I build things for the web.
-            </p>
-          </Reveal>
+          {/* Indented from the heading so the statement reads as a pull quote
+              rather than another line of the same block. */}
+          <LineReveal
+            text={lead}
+            className="max-w-[18ch] font-display text-[clamp(2rem,6vw,4.5rem)] leading-[1.05] tracking-tight md:ml-[8%]"
+          />
         </div>
 
-        <div className="flex max-w-2xl flex-col gap-7">
-          {paragraphs.map((text, i) => (
-            // Staggered by hand so the paragraphs settle one after another
-            // rather than all at once.
-            <Reveal key={text} delay={i * 0.08}>
-              <p className="text-lg leading-relaxed text-foreground/70 sm:text-xl">
-                {text}
-              </p>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal>
-          <ul className="flex max-w-2xl flex-col">
-            {details.map(([label, value]) => (
-              <li
-                key={label}
-                className="flex flex-wrap items-baseline justify-between gap-4 border-t border-foreground/15 py-5"
-              >
-                <span className="text-xs uppercase tracking-[0.2em] text-foreground/45">
-                  {label}
-                </span>
-                <span className="text-base sm:text-lg">{value}</span>
-              </li>
+        {/* Asymmetric: the text holds a narrow measure on the left while the
+            portrait starts inside the same track and lifts above the baseline,
+            so it breaks the grid instead of sitting neatly beside it. */}
+        <div className="grid gap-y-14 md:grid-cols-12 md:gap-x-8">
+          <div className="order-2 flex max-w-md flex-col gap-7 md:col-span-6 md:col-start-1 md:row-start-1 md:pt-16">
+            {paragraphs.map((text, i) => (
+              <Reveal key={text} delay={i * 0.08}>
+                <p className="text-lg leading-relaxed text-foreground/70 sm:text-xl">
+                  {text}
+                </p>
+              </Reveal>
             ))}
-          </ul>
+          </div>
+
+          {/* Shares row 1 with the text and starts inside its track, so the
+              two overlap instead of sitting in tidy columns. */}
+          {/* Leads on phones so a face arrives right after the statement. On
+              md+ it shares row 1 with the text and starts inside its track, so
+              the two overlap instead of sitting in tidy columns. */}
+          <div className="order-1 md:col-span-6 md:col-start-6 md:row-start-1 md:-mt-24 md:-mr-[4%]">
+            <Portrait />
+          </div>
+        </div>
+
+        {/* Wide strip: three columns on a single rule, the counterweight to the
+            narrow text above it. */}
+        <Reveal>
+          <dl className="grid grid-cols-1 border-t border-foreground/15 sm:grid-cols-3">
+            {details.map(([label, value]) => (
+              <div
+                key={label}
+                className="flex flex-col gap-2 border-b border-foreground/15 py-6 sm:border-b-0 sm:pr-8"
+              >
+                <dt className="text-xs uppercase tracking-[0.2em] text-foreground/45">
+                  {label}
+                </dt>
+                <dd className="text-base sm:text-lg">{value}</dd>
+              </div>
+            ))}
+          </dl>
         </Reveal>
 
         <Reveal>

@@ -117,11 +117,14 @@ export default function Footer() {
                 <span className="text-[clamp(3rem,10vw,8rem)] leading-none">
                   —
                 </span>
+                {/* Square headshot cut from me.png. A 1:1 object-cover of the
+                    full-body original only trims a quarter of its height, so
+                    the face would end up tiny inside the circle. */}
                 <Image
-                  src="/images/afthar-portrait.png"
+                  src="/images/me-avatar.png"
                   alt=""
-                  width={400}
-                  height={400}
+                  width={360}
+                  height={360}
                   sizes="160px"
                   className="h-[clamp(3.5rem,10vw,8rem)] w-[clamp(3.5rem,10vw,8rem)] shrink-0 rounded-full object-cover"
                 />
