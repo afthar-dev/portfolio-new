@@ -32,7 +32,7 @@ export default function AboutPage() {
     <main>
       <section className="shell flex flex-col gap-20 py-28 text-foreground sm:gap-28 sm:py-36">
         <div className="flex flex-col gap-8">
-          <SectionHeading label="About" />
+          <SectionHeading as="h1" label="About" />
 
           {/* Indented from the heading so the statement reads as a pull quote
               rather than another line of the same block. */}

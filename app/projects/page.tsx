@@ -12,7 +12,7 @@ export default function ProjectsPage() {
   return (
     <main>
       <section className="shell flex flex-col gap-12 py-32 text-foreground sm:gap-16">
-        <SectionHeading label="Projects" />
+        <SectionHeading as="h1" label="Projects" />
         <p className="max-w-[48ch] text-base text-foreground/60">
           Client work and things I built to find out how they work. A few are
           live, the rest run locally.
