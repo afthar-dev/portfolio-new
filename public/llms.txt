@@ -1,0 +1,42 @@
+# Afthar N N
+
+> Full stack developer in Kerala, India. I build websites, web apps, automations, voice agents and CRM tools for people who need software that works every day.
+
+## What I do
+
+- Websites and web apps built from scratch, with server rendering and on page SEO
+- Internal tools: HRMS, admin panels, role based access, reporting
+- Custom CRM and pipeline tools for small teams
+- Business automations with n8n and Make: lead capture, routing, follow ups, reporting
+- Realtime AI voice agents
+- Booking flows, payments and CMS handover
+
+## Stack
+
+React, Next.js, TypeScript, Tailwind CSS, Node.js, Express, PostgreSQL, MySQL, MongoDB, Prisma, Redis, Docker, Vercel, Render.
+
+## Experience
+
+- Full Stack Developer at 8 Chili, Bangalore, June 2026 to now. Internal project management and HRMS platform.
+- Full Stack Developer, freelance, at MAS Design and Code, November 2025 to May 2026. Role based HRMS, company site, form automations.
+- Frontend Developer Intern at Talks and Talks, February 2025 to August 2025. React interfaces, cut initial load by about 30 percent.
+
+## Education
+
+- BTech, Electronics and Communication Engineering, Mar Athanasius College of Engineering, 2022 to 2025
+- Diploma, Electronics and Communication Engineering, GPTC Perumbavoor, 2019 to 2022
+
+## Pages
+
+- /: what I do and selected work
+- /projects: client work and side projects
+- /about: background and how I work
+- /contact: contact form and email
+
+## Contact
+
+Email: aftharafthar5@gmail.com
+GitHub: https://github.com/afthar-dev
+LinkedIn: https://linkedin.com/in/afthar-dev
+
+Available for new projects. Happy to work remotely.

@@ -14,10 +14,10 @@ const projectTypes = [
 ];
 
 const budgets = [
-  'Under $1k',
-  '$1k – $5k',
-  '$5k – $10k',
-  '$10k+',
+  'Under ₹50,000',
+  '₹50,000 to ₹2 lakh',
+  '₹2 lakh to ₹5 lakh',
+  '₹5 lakh or more',
   'Not sure yet',
 ];
 

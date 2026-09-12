@@ -12,7 +12,7 @@ export const services: Service[] = [
   {
     name: 'Full Stack Software',
     outcome:
-      'Internal tools and platforms your team actually uses — instead of the spreadsheet everyone is quietly afraid of.',
+      'Internal tools and platforms your team actually uses, instead of the spreadsheet everyone is quietly afraid of.',
     includes: [
       'REST APIs, auth and role-based access',
       'Database design, schemas and migrations',
@@ -24,7 +24,7 @@ export const services: Service[] = [
   {
     name: 'Web Design & Development',
     outcome:
-      'Sites that load fast, rank on Google, and turn visitors into enquiries — not just something pretty to look at.',
+      'Sites that load fast, rank on Google, and turn visitors into enquiries, not just something pretty to look at.',
     includes: [
       'Responsive design and build from scratch',
       'Server-side rendering and on-page SEO',
@@ -36,7 +36,7 @@ export const services: Service[] = [
   {
     name: 'AI Automations',
     outcome:
-      'The repetitive work handled while you sleep — lead capture, routing, follow-ups and reporting that run themselves.',
+      'The repetitive work handled while you sleep: lead capture, routing, follow-ups and reporting that run themselves.',
     includes: [
       'n8n and Make workflow automation',
       'LLM and Gemini API integrations',

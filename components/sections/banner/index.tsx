@@ -14,7 +14,7 @@ const DRIFT = 220;
 
 const rows = [
   { text: 'Full stack developer', direction: 1 },
-  { text: 'React — Next.js — Node', direction: -1 },
+  { text: 'React · Next.js · Node', direction: -1 },
 ];
 
 interface RowProps {

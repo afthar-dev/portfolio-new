@@ -9,6 +9,14 @@ import './globals.css';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
 import AppShell from '@/components/layout/app-shell';
 import { ThemeProvider, themeInitScript } from '@/components/providers/theme-provider';
+import {
+  jobTitle,
+  siteDescription,
+  siteKeywords,
+  siteName,
+  siteUrl,
+  socialProfiles,
+} from '@/lib/site';
 
 const specialGothic = Special_Gothic_Expanded_One({
   variable: '--font-special-gothic',
@@ -38,9 +46,74 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: 'Afthar N N — Full Stack Developer',
-  description:
-    'Full stack developer building web applications with React, Next.js, Node and Postgres. Based in Kerala, India.',
+  // Makes every relative URL below, and in each page's metadata, resolve
+  // against the live origin instead of localhost.
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteName} | Websites, Web Apps and Automations`,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
+  keywords: siteKeywords,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: siteUrl,
+    siteName,
+    title: `${siteName} | Websites, Web Apps and Automations`,
+    description: siteDescription,
+    locale: 'en_IN',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${siteName} | Websites, Web Apps and Automations`,
+    description: siteDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+};
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#person`,
+      name: siteName,
+      jobTitle,
+      description: siteDescription,
+      url: siteUrl,
+      image: `${siteUrl}/images/me-avatar.png`,
+      email: 'mailto:aftharafthar5@gmail.com',
+      sameAs: socialProfiles,
+      address: {
+        '@type': 'PostalAddress',
+        addressRegion: 'Kerala',
+        addressCountry: 'IN',
+      },
+      knowsAbout: siteKeywords,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: siteName,
+      description: siteDescription,
+      inLanguage: 'en',
+      publisher: { '@id': `${siteUrl}/#person` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -60,6 +133,14 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="min-h-full flex flex-col">
+        {/* Structured data. Search engines use it for the knowledge panel and
+            sitelinks, and assistants reading the page get the same facts
+            without having to infer them from the copy. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+
         <ThemeProvider>
           <AppShell>{children}</AppShell>
         </ThemeProvider>

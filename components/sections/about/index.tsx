@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 
 const text =
-  "Give me wifi and enough caffeine and I'll build systems that elevate your brand — anywhere in the world. Let's connect on your next big idea.";
+  "Give me wifi and enough caffeine and I'll build systems that elevate your brand, anywhere in the world. Let's connect on your next big idea.";
 
 /**
  * Letters carry a running index across the whole sentence so each one owns an
