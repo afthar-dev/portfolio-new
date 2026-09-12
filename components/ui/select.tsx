@@ -97,7 +97,7 @@ export default function Select({
           aria-labelledby={labelId}
           onClick={() => setOpen((v) => !v)}
           onKeyDown={onKeyDown}
-          className="flex w-full items-center justify-between gap-3 border-b border-foreground/20 py-3 text-left text-lg outline-none transition-colors focus-visible:border-lime sm:text-xl"
+          className="flex w-full items-center justify-between gap-3 border-b border-foreground/20 py-3 text-left text-lg outline-none transition-colors focus-visible:border-accent sm:text-xl"
         >
           <span className={value ? '' : 'text-foreground/35'}>
             {value || placeholder}
@@ -143,7 +143,7 @@ export default function Select({
                   >
                     {option}
                     {selected && (
-                      <Check aria-hidden="true" className="h-4 w-4 text-lime" />
+                      <Check aria-hidden="true" className="h-4 w-4 text-accent" />
                     )}
                   </motion.li>
                 );

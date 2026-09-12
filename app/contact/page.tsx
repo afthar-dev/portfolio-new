@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Contact from '@/components/sections/contact';
 
 export const metadata: Metadata = {
-  title: 'Contact — Afthar N N',
+  title: 'Contact',
   description:
-    'Get in touch about full stack software, web development or AI automation work.',
+    'Tell me what you are building and roughly when you need it. Websites, web apps, automations, voice agents and CRM tools.',
 };
 
 export default function ContactPage() {

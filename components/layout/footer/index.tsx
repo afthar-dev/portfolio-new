@@ -114,8 +114,11 @@ export default function Footer() {
                 <span className="font-heading whitespace-nowrap text-[clamp(3rem,10vw,8rem)] uppercase leading-none tracking-tight">
                   Get in touch
                 </span>
-                <span className="text-[clamp(3rem,10vw,8rem)] leading-none">
-                  —
+                <span
+                  aria-hidden="true"
+                  className="text-[clamp(3rem,10vw,8rem)] leading-none"
+                >
+                  ·
                 </span>
                 {/* Square headshot cut from me.png. A 1:1 object-cover of the
                     full-body original only trims a quarter of its height, so

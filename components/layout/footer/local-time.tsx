@@ -25,5 +25,5 @@ export default function LocalTime() {
   }, []);
 
   // Reserve the line until the client clock is known.
-  return <span suppressHydrationWarning>{now ?? '—'}</span>;
+  return <span suppressHydrationWarning>{now ?? '··:··'}</span>;
 }

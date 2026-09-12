@@ -14,7 +14,7 @@ const DRIFT = 220;
 
 const rows = [
   { text: 'Full stack developer', direction: 1 },
-  { text: 'React — Next.js — Node', direction: -1 },
+  { text: 'React · Next.js · Node', direction: -1 },
 ];
 
 interface RowProps {
@@ -41,7 +41,7 @@ function Row({ progress, text, direction }: RowProps) {
           </span>
           <Asterisk
             aria-hidden="true"
-            className="mx-6 h-[clamp(1.75rem,4vw,3rem)] w-[clamp(1.75rem,4vw,3rem)] shrink-0 text-lime sm:mx-10"
+            className="mx-6 h-[clamp(1.75rem,4vw,3rem)] w-[clamp(1.75rem,4vw,3rem)] shrink-0 text-accent sm:mx-10"
             strokeWidth={2.5}
           />
         </span>

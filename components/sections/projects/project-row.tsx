@@ -58,7 +58,7 @@ export default function ProjectRow({
           {external && (
             <ArrowUpRight
               aria-hidden="true"
-              className="h-5 w-5 shrink-0 text-lime transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 sm:h-7 sm:w-7"
+              className="h-5 w-5 shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 sm:h-7 sm:w-7"
             />
           )}
         </span>

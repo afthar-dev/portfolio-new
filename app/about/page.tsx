@@ -6,9 +6,9 @@ import LineReveal from '@/components/ui/line-reveal';
 import Portrait from './portrait';
 
 export const metadata: Metadata = {
-  title: 'About — Afthar N N',
+  title: 'About',
   description:
-    'Afthar N N — developer from Kerala, working in Bangalore. Websites and internal tools.',
+    'I am a full stack developer from Kerala, working in Bangalore. I studied electronics and now build websites and internal tools.',
 };
 
 const lead =
@@ -17,7 +17,7 @@ const lead =
 const paragraphs = [
   "I'm Afthar. I'm from Kerala, and I work in Bangalore. For the last year and a half I've been building websites and the kind of internal tools people open every morning without thinking about them.",
   'I studied electronics, not software. That turned out to be useful. You learn to take a thing apart, work out why it is misbehaving, and stay calm while you do it.',
-  "Most days I'm somewhere between the database and the screen. I like being close to the whole of it — talking to the people who will use the thing, building it, then watching it go live.",
+  "Most days I'm somewhere between the database and the screen. I like being close to the whole of it, talking to the people who will use the thing, building it, then watching it go live.",
   "If something is slow, confusing, or breaks quietly, I'd rather fix that than add anything new on top of it.",
 ];
 

@@ -21,12 +21,12 @@ export default function Contact() {
       {/* Kept alongside the form: some people would rather just mail you. */}
       <Link
         href={`mailto:${email}`}
-        className="group flex flex-wrap items-center gap-3 font-display text-[clamp(1.75rem,6vw,4.5rem)] leading-[1.05] tracking-tight transition-colors duration-300 hover:text-lime"
+        className="group flex flex-wrap items-center gap-3 font-display text-[clamp(1.75rem,6vw,4.5rem)] leading-[1.05] tracking-tight transition-colors duration-300 hover:text-accent"
       >
         {email}
         <ArrowUpRight
           aria-hidden="true"
-          className="h-8 w-8 shrink-0 text-lime transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 sm:h-12 sm:w-12"
+          className="h-8 w-8 shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 sm:h-12 sm:w-12"
         />
       </Link>
 
@@ -39,7 +39,7 @@ export default function Contact() {
             <li key={label}>
               <Link
                 href={href}
-                className="group flex items-center justify-between gap-6 border-b border-foreground/15 py-5 transition-colors duration-300 hover:text-lime"
+                className="group flex items-center justify-between gap-6 border-b border-foreground/15 py-5 transition-colors duration-300 hover:text-accent"
                 {...(external && {
                   target: '_blank',
                   rel: 'noopener noreferrer',

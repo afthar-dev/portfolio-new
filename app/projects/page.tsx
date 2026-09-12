@@ -3,9 +3,9 @@ import SectionHeading from '@/components/ui/section-heading';
 import ProjectsGallery from '@/components/sections/projects/gallery';
 
 export const metadata: Metadata = {
-  title: 'Projects — Afthar N N',
+  title: 'Projects',
   description:
-    'Selected work: full stack software, web design and development, and AI automations.',
+    'Work I have shipped: a booking site taking real payments, a role based HRMS, a realtime voice agent and a chat app.',
 };
 
 export default function ProjectsPage() {
