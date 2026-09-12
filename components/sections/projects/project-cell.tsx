@@ -25,7 +25,7 @@ export default function ProjectCell({
       <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl bg-foreground/5">
         <Image
           src={image}
-          alt=""
+          alt={`${name}, ${description}`}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover"

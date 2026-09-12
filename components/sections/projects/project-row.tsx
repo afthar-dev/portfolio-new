@@ -45,7 +45,7 @@ export default function ProjectRow({
         >
           <Image
             src={image}
-            alt=""
+            alt={`${title1} ${title2}, ${discipline}`}
             width={320}
             height={200}
             sizes="320px"

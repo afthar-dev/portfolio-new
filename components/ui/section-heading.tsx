@@ -5,6 +5,11 @@ import { motion } from 'framer-motion';
 interface SectionHeadingProps {
   label: string;
   className?: string;
+  /**
+   * Heading level. Sections on a page default to h2; a page whose only
+   * heading is this one should pass "h1" so the document has a top level.
+   */
+  as?: 'h1' | 'h2';
 }
 
 const letter = {
@@ -25,13 +30,14 @@ const letter = {
 export default function SectionHeading({
   label,
   className = '',
+  as: Tag = 'h2',
 }: SectionHeadingProps) {
   const words = label.split(' ');
   // Runs across the whole label so the stagger does not restart each word.
   let index = 0;
 
   return (
-    <h2
+    <Tag
       className={`font-heading flex flex-wrap uppercase leading-[0.95] tracking-tight text-foreground text-[clamp(1.75rem,8vw,2.25rem)] sm:text-5xl md:text-6xl ${className}`}
     >
       {/* Readable label for assistive tech; the split letters are decorative. */}
@@ -62,6 +68,6 @@ export default function SectionHeading({
           </span>
         ))}
       </span>
-    </h2>
+    </Tag>
   );
 }

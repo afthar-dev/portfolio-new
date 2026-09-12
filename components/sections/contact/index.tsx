@@ -11,7 +11,9 @@ export default function Contact() {
       className="shell flex min-h-screen flex-col justify-center gap-12 py-32 text-foreground sm:gap-16"
     >
       <div className="flex flex-col gap-5">
-        <SectionHeading label="Contact" />
+        {/* This section is the whole of /contact, so its heading is the page's
+            top level rather than a section under one. */}
+        <SectionHeading as="h1" label="Contact" />
         <p className="max-w-2xl text-lg text-foreground/60 sm:text-xl">
           Tell me what you are building and roughly when you need it. I reply to
           everything, usually within a day.
