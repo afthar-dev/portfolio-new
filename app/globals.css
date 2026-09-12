@@ -10,17 +10,23 @@
 :root {
   --background: #f8f1e7;
   --foreground: #0b0b0b;
+  /* Accent for text, icons and borders sitting on the page background. Lime
+     on cream is about 1.3:1, so the light theme uses burgundy instead. Lime
+     is still used directly where it is a fill behind ink, not a foreground. */
+  --accent: #5b0f18;
 }
 
 /* Dark theme */
 .dark {
   --background: #0b0b0b;
   --foreground: #f8f1e7;
+  --accent: #c9fd74;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
   --color-burgundy: #5b0f18;
   --color-ink: #0b0b0b;
   --color-lime: #c9fd74;

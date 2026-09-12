@@ -13,8 +13,8 @@ import { useMediaQuery } from "@/lib/use-media-query";
 import { entries, type Entry } from "./experience-data";
 
 /** Lime reads well on ink but nearly vanishes on cream, so the accent flips. */
-const ACCENT = "text-burgundy dark:text-lime";
-const ACCENT_BG = "bg-burgundy dark:bg-lime";
+const ACCENT = "text-accent";
+const ACCENT_BG = "bg-accent";
 
 const Card = memo(function Card({ entry }: { entry: Entry }) {
   return (

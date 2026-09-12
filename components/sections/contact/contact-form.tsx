@@ -24,7 +24,7 @@ const budgets = [
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 const fieldClass =
-  'w-full border-b border-foreground/20 bg-transparent py-3 text-lg outline-none transition-colors placeholder:text-foreground/35 focus:border-lime sm:text-xl';
+  'w-full border-b border-foreground/20 bg-transparent py-3 text-lg outline-none transition-colors placeholder:text-foreground/35 focus:border-accent sm:text-xl';
 
 const labelClass = 'text-xs uppercase tracking-[0.2em] text-foreground/45';
 
@@ -62,7 +62,7 @@ export default function ContactForm() {
     return (
       <div className="flex flex-col gap-3 border-t border-foreground/15 pt-10">
         <p className="flex items-center gap-3 font-display text-[clamp(1.5rem,3.5vw,2.5rem)] leading-tight">
-          <Check aria-hidden="true" className="h-7 w-7 shrink-0 text-lime" />
+          <Check aria-hidden="true" className="h-7 w-7 shrink-0 text-accent" />
           Message sent.
         </p>
         <p className="text-lg text-foreground/60">

@@ -50,7 +50,7 @@ export default function ServiceCard({
         style={animated ? { scale, rotate } : undefined}
         className="h-[62vh] min-h-[420px] w-full origin-top"
       >
-        <div className="group relative flex h-full w-full flex-col gap-6 overflow-hidden rounded-3xl border-2 border-foreground/15 bg-background p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.45)] transition-colors duration-300 hover:border-lime sm:gap-8 sm:p-10">
+        <div className="group relative flex h-full w-full flex-col gap-6 overflow-hidden rounded-3xl border-2 border-foreground/15 bg-background p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.45)] transition-colors duration-300 hover:border-accent sm:gap-8 sm:p-10">
           <span className="text-xs uppercase tracking-[0.2em] text-foreground/40">
             Service
           </span>
@@ -89,7 +89,7 @@ export default function ServiceCard({
               href={serviceCtaHref}
               // min-h-11 gives the inline link a 44px touch target on phones;
               // from sm up it sits in a row where the height is already set.
-              className="flex min-h-11 shrink-0 items-center gap-2 text-sm font-medium uppercase tracking-wide text-foreground transition-colors hover:text-lime sm:min-h-0"
+              className="flex min-h-11 shrink-0 items-center gap-2 text-sm font-medium uppercase tracking-wide text-foreground transition-colors hover:text-accent sm:min-h-0"
             >
               Start a project
               <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
