@@ -57,8 +57,12 @@ export default function Hero() {
         className="font-display pointer-events-none relative z-[1] w-[80%] text-center uppercase text-white"
         style={{
           mixBlendMode: "difference",
-          fontSize: "clamp(1.25rem, 4.6vw, 3.75rem)",
-          lineHeight: 1.3,
+          // 4.6vw only reaches 17px on a 375px screen, so the old 1.25rem floor
+          // won and the headline sat at body-copy size on a phone. The steeper
+          // middle term carries small screens; the 3.75rem cap keeps desktop
+          // exactly as it was.
+          fontSize: "clamp(1.9rem, 7.5vw, 3.75rem)",
+          lineHeight: 1.25,
         }}
       >
         {heroLines.map((line, i) => (

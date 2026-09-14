@@ -132,7 +132,12 @@ export default function ScratchOverlay({
         }}
         onTouchEnd={() => (last.current = null)}
         // No radius needed: the ticket's mask already clips this to shape.
-        className="h-full w-full cursor-crosshair touch-none"
+        //
+        // pan-y rather than touch-none: the card fills most of a phone screen,
+        // and swallowing every touch gesture meant a finger landing on it could
+        // not scroll the page at all. Vertical drags now pass through to the
+        // page while sideways scratching still reaches the canvas.
+        className="h-full w-full cursor-crosshair [touch-action:pan-y]"
       />
 
       {hintVisible && (

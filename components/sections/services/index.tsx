@@ -29,7 +29,9 @@ export default function Services() {
     >
       <SectionHeading label="Services" />
 
-      <div ref={container} className="relative flex flex-col">
+      {/* The pinned cards supply their own spacing from md up; below that the
+          stack needs a real gap of its own. */}
+      <div ref={container} className="relative flex flex-col gap-6 md:gap-0">
         {services.map((service, i) => (
           <ServiceCard
             key={service.name}
