@@ -43,12 +43,16 @@ export default function ServiceCard({
     <div
       // Each card pins in turn; the offset leaves the edge of the card
       // beneath visible so the pile reads as depth rather than one swap.
-      className="flex h-[78vh] items-center justify-center md:sticky"
+      //
+      // The viewport heights are md+ only. Below that the cards do not pin, so
+      // a 78vh shell around a 62vh card just padded every card with a third of
+      // a screen of nothing and made the section 2.7 screens long.
+      className="flex items-center justify-center md:h-[78vh] md:sticky"
       style={{ top: animated ? `calc(6rem + ${index * 14}px)` : undefined }}
     >
       <motion.div
         style={animated ? { scale, rotate } : undefined}
-        className="h-[62vh] min-h-[420px] w-full origin-top"
+        className="w-full origin-top md:h-[62vh] md:min-h-[420px]"
       >
         <div className="group relative flex h-full w-full flex-col gap-6 overflow-hidden rounded-3xl border-2 border-foreground/15 bg-background p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.45)] transition-colors duration-300 hover:border-accent sm:gap-8 sm:p-10">
           <span className="text-xs uppercase tracking-[0.2em] text-foreground/40">

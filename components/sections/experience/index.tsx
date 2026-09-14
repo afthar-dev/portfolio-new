@@ -11,6 +11,7 @@ import {
 import SectionHeading from "@/components/ui/section-heading";
 import { useMediaQuery } from "@/lib/use-media-query";
 import { entries, type Entry } from "./experience-data";
+import MobileTimeline from "./mobile-timeline";
 
 /** Lime reads well on ink but nearly vanishes on cream, so the accent flips. */
 const ACCENT = "text-accent";
@@ -59,24 +60,17 @@ const Track = memo(function Track() {
   );
 });
 
-/**
- * The hairline the nodes sit on. With `progress` it fills left to right as the
- * section scrolls; without, it is a plain accent line for the swipeable row.
- */
-function Rail({ progress }: { progress?: MotionValue<number> }) {
+/** The hairline the nodes sit on, filling left to right as the section scrolls. */
+function Rail({ progress }: { progress: MotionValue<number> }) {
   return (
     <span
       aria-hidden="true"
       className="pointer-events-none absolute inset-x-0 top-0 h-px bg-foreground/15"
     >
-      {progress ? (
-        <motion.span
-          style={{ scaleX: progress }}
-          className={`block h-full w-full origin-left ${ACCENT_BG}`}
-        />
-      ) : (
-        <span className={`block h-full w-full opacity-40 ${ACCENT_BG}`} />
-      )}
+      <motion.span
+        style={{ scaleX: progress }}
+        className={`block h-full w-full origin-left ${ACCENT_BG}`}
+      />
     </span>
   );
 }
@@ -181,13 +175,10 @@ export default function Experience() {
             </div>
           </div>
         ) : (
-          /* Swipeable row. overscroll-x-contain stops the swipe turning into a
-             browser back gesture once the row hits its end. */
-          <div className="overflow-x-auto overscroll-x-contain px-5 pb-4 sm:px-10">
-            <div className="relative w-max pr-5">
-              <Rail />
-              <Track />
-            </div>
+          /* Phones read the timeline top to bottom instead. A sideways row
+             gave no hint that it scrolled and no sense of position. */
+          <div className="shell">
+            <MobileTimeline />
           </div>
         )}
       </div>
