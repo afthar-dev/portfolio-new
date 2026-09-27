@@ -18,9 +18,15 @@ export default function Services() {
 
   // Sticky stacking eats a lot of scroll and reads poorly on phones, so the
   // cards fall back to a plain list there and under reduced-motion.
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  //
+  // Height matters as much as width: a phone in landscape clears 768px wide
+  // but leaves ~390px of height, and a card pinned at top:96px with a 420px
+  // floor then runs off the bottom of the screen with no way to reach it.
+  const roomToPin = useMediaQuery(
+    "(min-width: 768px) and (min-height: 640px)"
+  );
   const reduceMotion = useReducedMotion();
-  const animated = isDesktop && !reduceMotion;
+  const animated = roomToPin && !reduceMotion;
 
   return (
     <section
