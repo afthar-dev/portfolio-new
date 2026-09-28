@@ -58,7 +58,10 @@ export default function Cta() {
             <span className={`${styles.notch} ${styles.notchBottom}`} />
           </div>
 
-          <div className="flex flex-1 items-center gap-6 px-6 py-10 sm:gap-10 sm:px-10">
+          {/* min-w-0 at every flex level: the default min-width:auto refuses to
+              shrink a flex item below its content, so one over-wide child grew
+              the whole ticket past the viewport rather than being contained. */}
+          <div className="flex min-w-0 flex-1 items-center gap-6 px-6 py-10 sm:gap-10 sm:px-10">
             <MessagesSquare
               aria-hidden="true"
               className="hidden h-16 w-16 shrink-0 text-foreground/70 md:block"
@@ -70,7 +73,7 @@ export default function Cta() {
               className="hidden w-px self-stretch bg-foreground/15 md:block"
             />
 
-            <div className="flex flex-1 flex-col items-center gap-4 text-center sm:gap-5">
+            <div className="flex min-w-0 flex-1 flex-col items-center gap-4 text-center sm:gap-5">
               {/* 12px floor: 0.65rem fell below the readable minimum, and the
                   tracking eases off to buy back the width that costs. */}
               <p className="font-heading text-xs uppercase tracking-[0.2em] text-foreground/50 sm:tracking-[0.3em]">

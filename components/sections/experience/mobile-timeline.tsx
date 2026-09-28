@@ -49,7 +49,7 @@ function Item({ entry, index }: { entry: Entry; index: number }) {
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         className="flex flex-col gap-1.5 pb-10"
       >
-        <span className="text-[0.7rem] uppercase tracking-[0.2em] text-foreground/40">
+        <span className="text-xs uppercase tracking-[0.2em] text-foreground/40">
           {entry.kind}
         </span>
 

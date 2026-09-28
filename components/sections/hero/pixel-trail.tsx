@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useMediaQuery } from '@/lib/use-media-query';
 
 const COLUMNS = 20;
 const CLEAR_DELAY = 300;
@@ -13,6 +14,11 @@ const CLEAR_DELAY = 300;
 export default function PixelTrail() {
   const [rows, setRows] = useState(0);
   const timeouts = useRef(new Map<HTMLDivElement, number>());
+
+  // The grid only responds to mouseenter, so on a touch screen it is ~900
+  // inert nodes built, laid out and painted on the first section the visitor
+  // sees. Devices without a fine pointer get nothing at all.
+  const hasFinePointer = useMediaQuery('(hover: hover) and (pointer: fine)');
 
   useEffect(() => {
     const measure = () => {
@@ -47,6 +53,8 @@ export default function PixelTrail() {
 
     timeouts.current.set(el, id);
   };
+
+  if (!hasFinePointer) return null;
 
   return (
     <div

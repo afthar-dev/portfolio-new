@@ -128,7 +128,10 @@
 	background-color: var(--foreground);
 	color: var(--background);
 	padding: 18px 0;
-	width: 240px;
+	/* Fluid rather than a hard 240px: inside the CTA ticket on a phone the
+	   column is only ~198px wide, and a fixed width forced the whole card to
+	   grow past the viewport instead of the button shrinking. */
+	width: min(240px, 100%);
 	transition: background-color 0.35s ease-out;
 	position: relative;
 	overflow: hidden;

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { Project } from './projects-data';
 
 const slide = {
@@ -27,6 +27,7 @@ export default function ProjectRow({
   hoverable,
 }: ProjectRowProps) {
   const [isActive, setIsActive] = useState(false);
+  const reduceMotion = useReducedMotion();
   const external = href?.startsWith('http');
   const isOpen = hoverable ? isActive : true;
 
@@ -76,7 +77,14 @@ export default function ProjectRow({
     'group flex flex-col items-center gap-3 border-b border-foreground/15 py-8 text-center font-display text-[clamp(1.75rem,6vw,4.5rem)] leading-[1.1] tracking-tight transition-colors duration-300 hover:text-foreground/90 sm:py-10';
 
   return (
-    <div
+    // The row itself had no entrance at all, so on a phone (where the hover
+    // reveal never fires) the whole section arrived completely static.
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      whileTap={reduceMotion || hoverable ? undefined : { scale: 0.99 }}
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
     >
@@ -91,6 +99,6 @@ export default function ProjectRow({
       ) : (
         <div className={rowClass}>{content}</div>
       )}
-    </div>
+    </motion.div>
   );
 }
