@@ -60,19 +60,26 @@ export default function ServiceCard({
       }`}
       style={{ top: animated ? `calc(6rem + ${index * 14}px)` : undefined }}
     >
-      {/* When the cards are not pinned there is no scale or rotate to carry
-          them, which left the whole section static on phones. A plain reveal
-          stands in, staggered so the stack arrives in order. */}
+      {/* Every card reveals the same way on every screen. The reveal must not
+          be gated on `animated`: that comes from a media query which reads
+          false during SSR and hydration, so the cards mounted with the hidden
+          initial state and then, once it flipped true on desktop, lost the
+          whileInView target that would have brought them back. They stayed
+          at opacity 0 for good. whileInView is therefore unconditional, so
+          whatever initial state a card mounts with, something always resolves
+          it to visible. The scroll-driven scale and rotate still compose on
+          top via `style`. */}
       <motion.div
         style={animated ? { scale, rotate } : undefined}
-        initial={animated || reduceMotion ? false : { opacity: 0, y: 24 }}
-        whileInView={animated ? undefined : { opacity: 1, y: 0 }}
-        viewport={animated ? undefined : { once: true, amount: 0.25 }}
-        transition={
-          animated
-            ? undefined
-            : { duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }
-        }
+        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{
+          duration: 0.6,
+          delay: index * 0.05,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        // Tap feedback only where scale is not already driven by scroll.
         whileTap={animated || reduceMotion ? undefined : { scale: 0.99 }}
         className={`w-full origin-top ${
           animated ? 'h-[62vh] min-h-[420px]' : ''
